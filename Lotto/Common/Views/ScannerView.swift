@@ -31,6 +31,9 @@ class ScannerView: UIView {
     private var previewLayer: AVCaptureVideoPreviewLayer?
     private var captureSession: AVCaptureSession?
     
+    //촬영 시 어떤 데이터를 검사할건지
+    private let metadataObjectTypes: [AVMetadataObject.ObjectType] = [.qr]
+    
     private var cornerLength: CGFloat = 30
     private var cornerLineWidth: CGFloat = 5
     private var rectOfInterest: CGRect {
@@ -53,7 +56,7 @@ class ScannerView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        
+        initView()
     }
     
     required init?(coder: NSCoder) {
@@ -88,13 +91,13 @@ class ScannerView: UIView {
         
         let metadataOutput = AVCaptureMetadataOutput()
         if captureSession.canAddOutput(metadataOutput) {
-            metadataOutput.metadataObjectTypes = [.qr]
+            captureSession.addOutput(metadataOutput)
+            
+            metadataOutput.metadataObjectTypes = metadataObjectTypes
             metadataOutput.setMetadataObjectsDelegate(
                 self,
                 queue: DispatchQueue.main
             )
-            
-            captureSession.addOutput(metadataOutput)
         } else {
             return fail()
         }

@@ -56,13 +56,6 @@ class MainTabBarController: UITabBarController {
         homenc.tabBarItem.tag = 1
         homenc.tabBarItem.title = "홈"
         homenc.tabBarItem.image = UIImage(named: "tab_home")
-        homenc.tabBarItem.selectedImage = nil
-        
-        let attribute: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.foregroundColor: UIColor.clear
-        ]
-        
-        homenc.tabBarItem.setTitleTextAttributes(attribute, for: .selected)
         
         let setting = SettingCollection()
         let settingnc = UINavigationController(rootViewController: setting)

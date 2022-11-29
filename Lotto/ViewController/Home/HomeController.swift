@@ -22,7 +22,8 @@ class HomeController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        setupNavigation()
         setupControls()
         setupLayout()
     }
@@ -30,11 +31,22 @@ class HomeController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        UIView.animate(withDuration: 0.15) {
+            self.qrButton.alpha = 1
+            self.qrButton.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+            self.qrButton.imageView?.transform = .identity
+        } completion: { _ in
+            self.qrButton.transform = .identity
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        setLayer(false)
+        qrButton.alpha = 0
+        qrButton.transform = CGAffineTransform(scaleX: 0, y: 0)
+        qrButton.imageView?.transform = CGAffineTransform(scaleX: 0, y: 0)
     }
     
     @objc
@@ -115,7 +127,7 @@ extension HomeController {
         
         qrButton = UIButton().then({ b in
             b.adjustsImageWhenHighlighted = false
-            b.layer.shadowColor = UIColor.black.cgColor
+            b.layer.shadowColor = UIColor.darkGray.cgColor
             b.layer.shadowOffset = CGSize(width: 1, height: 1)
             b.layer.shadowOpacity = 0.3
             b.layer.shadowRadius = 1
@@ -147,7 +159,7 @@ extension HomeController {
     }
     
     private func setupNavigation() {
-        navigationItem.title = "로또"
+        navigationItem.title = "Home"
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -184,7 +196,7 @@ extension HomeController {
         tabBar.addSubview(qrButton)
         qrButton.snp.makeConstraints { make in
             make.centerX.equalTo(tabBar.snp.centerX)
-            make.bottom.equalTo(tabBar.safeAreaLayoutGuide.snp.bottom).offset(-10)
+            make.bottom.equalTo(tabBar.safeAreaLayoutGuide)
             make.width.equalTo(60)
             make.height.equalTo(60)
         }

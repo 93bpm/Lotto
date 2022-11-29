@@ -19,6 +19,12 @@
 		638E75982934960D00388FF5 /* MyNumberController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E75972934960D00388FF5 /* MyNumberController.swift */; };
 		638E759A2934968A00388FF5 /* SettingCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E75992934968A00388FF5 /* SettingCollection.swift */; };
 		638E759C29349BD600388FF5 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E759B29349BD600388FF5 /* ScannerView.swift */; };
+		63DD1FB12935927B006FA99D /* StoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DD1FB02935927B006FA99D /* StoreController.swift */; };
+		63DD1FC02935A527006FA99D /* MyNumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DD1FBF2935A527006FA99D /* MyNumberCell.swift */; };
+		63DD1FC22935A5C2006FA99D /* MyNumberHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DD1FC12935A5C2006FA99D /* MyNumberHeader.swift */; };
+		63DD1FD42935EC10006FA99D /* GmarketSansBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 63DD1FD22935EBB4006FA99D /* GmarketSansBold.otf */; };
+		63DD1FD52935EC14006FA99D /* GmarketSansMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 63DD1FD32935EBB4006FA99D /* GmarketSansMedium.otf */; };
+		63DD1FD72935EC25006FA99D /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DD1FD62935EC25006FA99D /* UIFont.swift */; };
 		FFBC59BFB4615DDCCA1133A2 /* Pods_Lotto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B76A8AB2D9D453E62C432630 /* Pods_Lotto.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +44,12 @@
 		638E75972934960D00388FF5 /* MyNumberController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNumberController.swift; sourceTree = "<group>"; };
 		638E75992934968A00388FF5 /* SettingCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCollection.swift; sourceTree = "<group>"; };
 		638E759B29349BD600388FF5 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+		63DD1FB02935927B006FA99D /* StoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StoreController.swift; path = Lotto/Common/Views/StoreController.swift; sourceTree = SOURCE_ROOT; };
+		63DD1FBF2935A527006FA99D /* MyNumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNumberCell.swift; sourceTree = "<group>"; };
+		63DD1FC12935A5C2006FA99D /* MyNumberHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNumberHeader.swift; sourceTree = "<group>"; };
+		63DD1FD22935EBB4006FA99D /* GmarketSansBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansBold.otf; sourceTree = "<group>"; };
+		63DD1FD32935EBB4006FA99D /* GmarketSansMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansMedium.otf; sourceTree = "<group>"; };
+		63DD1FD62935EC25006FA99D /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		7329730CFF7CF56F497E90E1 /* Pods-Lotto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lotto.release.xcconfig"; path = "Target Support Files/Pods-Lotto/Pods-Lotto.release.xcconfig"; sourceTree = "<group>"; };
 		B76A8AB2D9D453E62C432630 /* Pods_Lotto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lotto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -102,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				638E75882934912C00388FF5 /* Views */,
+				63DD1FD12935EBA6006FA99D /* Font */,
 				638E75872934912300388FF5 /* Extension */,
 			);
 			path = Common;
@@ -137,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				638E7593293492C000388FF5 /* UIColor.swift */,
+				63DD1FD62935EC25006FA99D /* UIFont.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -160,6 +174,7 @@
 		638E758C2934914900388FF5 /* Store */ = {
 			isa = PBXGroup;
 			children = (
+				63DD1FB02935927B006FA99D /* StoreController.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -168,6 +183,8 @@
 			isa = PBXGroup;
 			children = (
 				638E75972934960D00388FF5 /* MyNumberController.swift */,
+				63DD1FC12935A5C2006FA99D /* MyNumberHeader.swift */,
+				63DD1FBF2935A527006FA99D /* MyNumberCell.swift */,
 			);
 			path = MyNumber;
 			sourceTree = "<group>";
@@ -178,6 +195,15 @@
 				638E758F2934922F00388FF5 /* HomeController.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		63DD1FD12935EBA6006FA99D /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				63DD1FD22935EBB4006FA99D /* GmarketSansBold.otf */,
+				63DD1FD32935EBB4006FA99D /* GmarketSansMedium.otf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		B7B0EB99EA3C1C294EF11DF6 /* Pods */ = {
@@ -249,6 +275,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63DD1FD52935EC14006FA99D /* GmarketSansMedium.otf in Resources */,
+				63DD1FD42935EC10006FA99D /* GmarketSansBold.otf in Resources */,
 				638E757C29348E7800388FF5 /* LaunchScreen.storyboard in Resources */,
 				638E757929348E7800388FF5 /* Assets.xcassets in Resources */,
 			);
@@ -304,12 +332,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				638E757729348E7700388FF5 /* Lotto.xcdatamodeld in Sources */,
+				63DD1FC22935A5C2006FA99D /* MyNumberHeader.swift in Sources */,
+				63DD1FB12935927B006FA99D /* StoreController.swift in Sources */,
 				638E75962934939200388FF5 /* PersistenceService.swift in Sources */,
 				638E75982934960D00388FF5 /* MyNumberController.swift in Sources */,
+				63DD1FC02935A527006FA99D /* MyNumberCell.swift in Sources */,
 				638E7594293492C000388FF5 /* UIColor.swift in Sources */,
 				638E759A2934968A00388FF5 /* SettingCollection.swift in Sources */,
 				638E757129348E7700388FF5 /* ViewController.swift in Sources */,
 				638E758A2934913C00388FF5 /* MainTabBarController.swift in Sources */,
+				63DD1FD72935EC25006FA99D /* UIFont.swift in Sources */,
 				638E756D29348E7700388FF5 /* AppDelegate.swift in Sources */,
 				638E75902934922F00388FF5 /* HomeController.swift in Sources */,
 				638E759C29349BD600388FF5 /* ScannerView.swift in Sources */,

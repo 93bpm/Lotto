@@ -36,7 +36,7 @@ extension UIColor {
     }
     
     static var tabBarColor: UIColor? {
-        return UIColor(named: "SubBackgroundColor")
+        return UIColor(named: "TabBarColor")
     }
 }
 

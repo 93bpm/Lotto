@@ -76,6 +76,11 @@ class MyNumberController: UIViewController {
     }
     
     @objc
+    private func dismissKeyboard() {
+        searchBar.endEditing(true)
+    }
+    
+    @objc
     private func keyboardWillShow(_ notification: Notification) {
         guard
             keyboardHeight == 0,
@@ -110,12 +115,17 @@ class MyNumberController: UIViewController {
     
     @objc
     private func handleManual() {
-        
+        let vc = ManualController()
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true)
     }
     
     @objc
     private func handleQR() {
-        
+        let vc = ScannerController()
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
     }
 }
 
@@ -136,8 +146,10 @@ extension MyNumberController {
     }
     
     private func setupControls() {
-        titleView = UIView()
-        titleView.backgroundColor = .backgroundColor
+        titleView = UIView().then({ v in
+            v.backgroundColor = .backgroundColor
+            v.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
+        })
         
         titleLabel = UILabel().then({ l in
             l.text = "나의 번호"
@@ -165,6 +177,8 @@ extension MyNumberController {
             l.textAlignment = .center
             l.textColor = .darkGray
             l.font = .systemFont(ofSize: 20)
+            l.isUserInteractionEnabled = true
+            l.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
         })
         
         tableView = UITableView().then({ tv in
@@ -198,17 +212,17 @@ extension MyNumberController {
             l.textAlignment = .center
             l.textColor = .textColor
             l.adjustsFontSizeToFitWidth = true
-            l.font = .customFont(ofSize: 17)
+            l.font = .systemFont(ofSize: 18)
         })
         
         manualButton = UIButton().then({ b in
             b.layer.masksToBounds = true
             b.layer.cornerRadius = 15
             b.backgroundColor = .systemBlue
-            b.setTitle("수동입력", for: .normal)
+            b.setTitle("직접입력", for: .normal)
             b.setTitleColor(.white, for: .normal)
             b.titleLabel?.adjustsFontSizeToFitWidth = true
-            b.titleLabel?.font = .customFont(ofSize: 17)
+            b.titleLabel?.font = .systemFont(ofSize: 18)
             b.addTarget(self, action: #selector(handleManual), for: .touchUpInside)
         })
         
@@ -219,7 +233,7 @@ extension MyNumberController {
             b.setTitle("QR코드", for: .normal)
             b.setTitleColor(.white, for: .normal)
             b.titleLabel?.adjustsFontSizeToFitWidth = true
-            b.titleLabel?.font = .customFont(ofSize: 17)
+            b.titleLabel?.font = .systemFont(ofSize: 18)
             b.addTarget(self, action: #selector(handleQR), for: .touchUpInside)
         })
         

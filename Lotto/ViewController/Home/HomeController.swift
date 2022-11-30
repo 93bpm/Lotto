@@ -92,8 +92,7 @@ extension HomeController {
     
     private func setupControls() {
         
-        let frame = view.frame
-        scannerView = ScannerView(frame: frame).then({ sv in
+        scannerView = ScannerView().then({ sv in
             sv.delegate = self
             sv.alpha = 0
         })

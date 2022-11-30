@@ -15,10 +15,6 @@ enum ScanStatus {
     case stop(_ isTap: Bool)
 }
 
-enum ScanType: String {
-    case prize, insert
-}
-
 protocol ScannerViewDelegate: AnyObject {
     func completion(in status: ScanStatus)
 }
@@ -53,8 +49,8 @@ class ScannerView: UIView {
         return captureSession.isRunning
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: UIScreen.main.bounds)
         
         initView()
     }

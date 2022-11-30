@@ -42,6 +42,8 @@ class MyNumberController: UIViewController {
         setupNotifications()
         setupControls()
         setupLayout()
+        
+        initData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -66,6 +68,11 @@ class MyNumberController: UIViewController {
             
             self.searchView.superview?.layoutIfNeeded()
         }
+    }
+    
+    private func initData() {
+        tableView.isHidden = true
+        noDataLabel.isHidden = false
     }
     
     @objc
@@ -100,6 +107,16 @@ class MyNumberController: UIViewController {
         
         searchView.superview?.layoutIfNeeded()
     }
+    
+    @objc
+    private func handleManual() {
+        
+    }
+    
+    @objc
+    private func handleQR() {
+        
+    }
 }
 
 extension MyNumberController {
@@ -126,14 +143,14 @@ extension MyNumberController {
             l.text = "나의 번호"
             l.textAlignment = .left
             l.textColor = .textColor
-            l.font = .customFont(ofSize: 28, isBold: true)
+            l.font = .boldSystemFont(ofSize: 28)
         })
         
         subTitleLabel = UILabel().then({ l in
             l.text = "회차별 로또번호를 등록해보세요."
             l.textAlignment = .left
             l.textColor = .lightGray
-            l.font = .customFont(ofSize: 15)
+            l.font = .systemFont(ofSize: 16)
         })
         
         profileIV = UIImageView().then({ iv in
@@ -141,6 +158,13 @@ extension MyNumberController {
             iv.layer.cornerRadius = 40
             iv.contentMode = .scaleAspectFit
             iv.image = UIImage(named: "user_profile")
+        })
+        
+        noDataLabel = UILabel().then({ l in
+            l.text = "내역이 없습니다."
+            l.textAlignment = .center
+            l.textColor = .darkGray
+            l.font = .systemFont(ofSize: 20)
         })
         
         tableView = UITableView().then({ tv in
@@ -170,8 +194,9 @@ extension MyNumberController {
         addView = UIView()
         
         numLabel = UILabel().then({ l in
-            l.text = "등록방법"
+            l.text = "번호추가"
             l.textAlignment = .center
+            l.textColor = .textColor
             l.adjustsFontSizeToFitWidth = true
             l.font = .customFont(ofSize: 17)
         })
@@ -179,21 +204,23 @@ extension MyNumberController {
         manualButton = UIButton().then({ b in
             b.layer.masksToBounds = true
             b.layer.cornerRadius = 15
-            b.backgroundColor = .backgroundColor
-            b.setTitle("수동추가", for: .normal)
-            b.setTitleColor(.textColor, for: .normal)
+            b.backgroundColor = .systemBlue
+            b.setTitle("수동입력", for: .normal)
+            b.setTitleColor(.white, for: .normal)
             b.titleLabel?.adjustsFontSizeToFitWidth = true
             b.titleLabel?.font = .customFont(ofSize: 17)
+            b.addTarget(self, action: #selector(handleManual), for: .touchUpInside)
         })
         
         qrButton = UIButton().then({ b in
             b.layer.masksToBounds = true
             b.layer.cornerRadius = 15
-            b.backgroundColor = .backgroundColor
-            b.setTitle("QR코드로 추가하기", for: .normal)
-            b.setTitleColor(.textColor, for: .normal)
+            b.backgroundColor = .systemBlue
+            b.setTitle("QR코드", for: .normal)
+            b.setTitleColor(.white, for: .normal)
             b.titleLabel?.adjustsFontSizeToFitWidth = true
             b.titleLabel?.font = .customFont(ofSize: 17)
+            b.addTarget(self, action: #selector(handleQR), for: .touchUpInside)
         })
         
         addStackView = UIStackView(arrangedSubviews: [manualButton, qrButton]).then({ sv in
@@ -224,6 +251,7 @@ extension MyNumberController {
         view.backgroundColor = .backgroundColor
         
         view.addSubview(titleView)
+        view.addSubview(noDataLabel)
         view.addSubview(tableView)
         view.addSubview(betweenView)
         view.addSubview(searchView)
@@ -231,6 +259,11 @@ extension MyNumberController {
         titleView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.25)
+        }
+        
+        noDataLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleView.snp.top)
+            make.left.bottom.right.equalTo(view.safeAreaLayoutGuide)
         }
         
         tableView.snp.makeConstraints { make in
@@ -311,7 +344,7 @@ extension MyNumberController: UITableViewDataSource,
                               UITableViewDelegate {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 0
     }
     
     func tableView(

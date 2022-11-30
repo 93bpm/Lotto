@@ -118,11 +118,7 @@ extension HomeController {
             b.setTitle("나의 당첨내역 확인하기", for: .normal)
             b.setTitleColor(.white, for: .normal)
             b.titleLabel?.font = .boldSystemFont(ofSize: 19)
-            b.addTarget(
-                self,
-                action: #selector(handleResult),
-                for: .touchUpInside
-            )
+            b.addTarget(self, action: #selector(handleResult), for: .touchUpInside)
         })
         
         qrButton = UIButton().then({ b in
@@ -131,29 +127,13 @@ extension HomeController {
             b.layer.shadowOffset = CGSize(width: 1, height: 1)
             b.layer.shadowOpacity = 0.3
             b.layer.shadowRadius = 1
-            
             b.layer.cornerRadius = 30
             
             b.backgroundColor = .systemBlue
             b.setImage(UIImage(named: "qr"), for: .normal)
-            
-            b.addTarget(
-                self,
-                action: #selector(handleTouchUpQR),
-                for: .touchUpInside
-            )
-            
-            b.addTarget(
-                self,
-                action: #selector(handleTouchUpQR),
-                for: .touchUpOutside
-            )
-            
-            b.addTarget(
-                self,
-                action: #selector(handleTouchDownQR),
-                for: .touchDown
-            )
+            b.addTarget(self, action: #selector(handleTouchUpQR), for: .touchUpInside)
+            b.addTarget(self, action: #selector(handleTouchUpQR), for: .touchUpOutside)
+            b.addTarget(self, action: #selector(handleTouchDownQR), for: .touchDown)
         })
         
     }

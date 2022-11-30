@@ -23,7 +23,7 @@ class MyNumberHeader: UITableViewHeaderFooterView {
     var section = 0
     var isOpen = false {
         didSet {
-            let title = isOpen ? "접기" : "모두보기"
+            let title = isOpen ? "접기" : "더보기"
             openButton.setTitle(title, for: .normal)
         }
     }
@@ -76,7 +76,7 @@ extension MyNumberHeader {
         titleLabel = UILabel().then({ l in
             l.textAlignment = .center
             l.textColor = .textColor
-            l.font = .customFont(ofSize: 21, isBold: true)
+            l.font = .boldSystemFont(ofSize: 22)
         })
         
         countLabel = UILabel().then({ l in
@@ -95,9 +95,9 @@ extension MyNumberHeader {
         
         openButton = UIButton().then({ b in
             b.backgroundColor = .subgroundColor
-            b.setTitle("모두보기", for: .normal)
+            b.setTitle("더보기", for: .normal)
             b.setTitleColor(.lightGray, for: .normal)
-            b.titleLabel?.font = .customFont(ofSize: 13)
+            b.titleLabel?.font = .systemFont(ofSize: 14)
             b.isEnabled = false
             b.adjustsImageWhenDisabled = false
         })

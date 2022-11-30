@@ -64,7 +64,8 @@ class MainTabBarController: UITabBarController {
         settingnc.tabBarItem.image = UIImage(named: "tab_menu")
         
         viewControllers = [numnc, homenc, settingnc]
-        selectedIndex = 1
+//        selectedIndex = 1
+        selectedIndex = 0
     }
 }
 

@@ -11,7 +11,7 @@ import SnapKit
 import Then
 
 protocol ManualControllerDelegate: AnyObject {
-    func didSaveNumber(_ number: [Int])
+    func didSave(_ number: [Int])
 }
 
 class ManualController: UIViewController {
@@ -60,7 +60,7 @@ class ManualController: UIViewController {
                 return
             }
             sender.didSelected(true)
-            sender.titleLabel?.font = .customFont(ofSize: 20, isBold: true)
+            sender.titleLabel?.font = .boldSandsFont(osSize: 20)
             
             selectedNums.append(sender.tag)
         default: //select → unselect
@@ -68,7 +68,7 @@ class ManualController: UIViewController {
                 break
             }
             sender.didSelected(false)
-            sender.titleLabel?.font = .customFont(ofSize: 20)
+            sender.titleLabel?.font = .sandsFont(ofSize: 20)
             
             selectedNums.remove(at: index)
         }
@@ -130,10 +130,10 @@ class ManualController: UIViewController {
                 
                 if selectedNums.contains(button.tag) {
                     button.didSelected(true)
-                    button.titleLabel?.font = .customFont(ofSize: 20, isBold: true)
+                    button.titleLabel?.font = .boldSandsFont(osSize: 20)
                 } else {
                     button.didSelected(false)
-                    button.titleLabel?.font = .customFont(ofSize: 20)
+                    button.titleLabel?.font = .sandsFont(ofSize: 20)
                 }
             }
         }
@@ -144,7 +144,7 @@ class ManualController: UIViewController {
     @objc
     private func handleSave() {
         guard selectedNums.count == 6 else {return}
-        delegate?.didSaveNumber(selectedNums)
+        delegate?.didSave(selectedNums)
     }
     
     private func setNumbers() {
@@ -361,13 +361,13 @@ extension ManualController {
     }
     
     private func setupNumStackView() -> UIStackView {
-        return UIStackView().then { sv in
-            
-            for _ in 0...5 {
-                let label = setupBallLabel()
-                sv.addArrangedSubview(label)
-            }
-            
+        var views = [UIView]()
+        (0...5).forEach { _ in
+            let label = setupBallLabel()
+            views.append(label)
+        }
+        
+        return UIStackView(arrangedSubviews: views).then { sv in
             sv.axis = .horizontal
             sv.distribution = .fillEqually
             sv.spacing = 10
@@ -380,31 +380,32 @@ extension ManualController {
             l.adjustsFontSizeToFitWidth = true
             l.textAlignment = .center
             l.textColor = .white
-            l.font = .customFont(ofSize: 19, isBold: true)
+            l.font = .boldSandsFont(osSize: 19)
         }
     }
     
     private func setupChoiceStackView() -> UIStackView {
-        return UIStackView().then { sv in
+        var yViews = [UIView]()
+        (0...8).forEach { i in //y
             
-            for i in 0...8 { //y
+            var xViews = [UIView]()
+            (1...5).forEach { j in //x
+                let tag = (i * 5) + j
                 
-                let xStack = UIStackView().then { sv in
-                    for j in 1...5 { //x
-                        let tag = (i * 5) + j
-                        
-                        let button = setupBallButton(tag)
-                        sv.addArrangedSubview(button)
-                    }
-                    
-                    sv.axis = .horizontal
-                    sv.distribution = .fillEqually
-                    sv.spacing = 8
-                }
-                
-                sv.addArrangedSubview(xStack)
+                let button = setupBallButton(tag)
+                xViews.append(button)
             }
             
+            let xStack = UIStackView(arrangedSubviews: xViews).then { sv in
+                sv.axis = .horizontal
+                sv.distribution = .fillEqually
+                sv.spacing = 8
+            }
+            
+            yViews.append(xStack)
+        }
+        
+        return UIStackView(arrangedSubviews: yViews).then { sv in
             sv.axis = .vertical
             sv.distribution = .fillEqually
             sv.spacing = 8
@@ -422,7 +423,7 @@ extension ManualController {
             b.setTitle(String(tag), for: .normal)
             b.setTitleColor(.textColor, for: .normal)
             b.titleLabel?.adjustsFontSizeToFitWidth = true
-            b.titleLabel?.font = .customFont(ofSize: 20)
+            b.titleLabel?.font = .sandsFont(ofSize: 20)
             b.addTarget(self, action: #selector(handleBall), for: .touchUpInside)
         }
     }

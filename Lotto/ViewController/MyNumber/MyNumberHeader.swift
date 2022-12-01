@@ -28,7 +28,7 @@ class MyNumberHeader: UITableViewHeaderFooterView {
         }
     }
     
-    private(set) var titleLabel: UILabel!
+    private(set) var roundLabel: UILabel!
     private(set) var countLabel: UILabel!
     private(set) var dateLabel: UILabel!
     private(set) var openButton: UIButton!
@@ -47,13 +47,13 @@ class MyNumberHeader: UITableViewHeaderFooterView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
 
-        titleLabel.text = "111회"
+        roundLabel.text = "111회"
         countLabel.text = "50장"
         dateLabel.text = "2022-11-18"
     }
     
     private func initData() {
-        titleLabel.text = nil
+        roundLabel.text = nil
         countLabel.text = nil
         dateLabel.text = nil
     }
@@ -73,7 +73,7 @@ extension MyNumberHeader {
     private func setupControls() {
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleOpen)))
         
-        titleLabel = UILabel().then({ l in
+        roundLabel = UILabel().then({ l in
             l.textAlignment = .center
             l.textColor = .textColor
             l.font = .boldSystemFont(ofSize: 22)
@@ -85,12 +85,12 @@ extension MyNumberHeader {
             l.backgroundColor = .systemBlue
             l.textAlignment = .center
             l.textColor = .white
-            l.font = .customFont(ofSize: 13)
+            l.font = .sandsFont(ofSize: 13)
         })
         
         dateLabel = UILabel().then({ l in
             l.textColor = .lightGray
-            l.font = .customFont(ofSize: 15)
+            l.font = .sandsFont(ofSize: 15)
         })
         
         openButton = UIButton().then({ b in
@@ -106,26 +106,26 @@ extension MyNumberHeader {
     private func setupLayout() {
         contentView.backgroundColor = .subgroundColor
         
-        addSubview(titleLabel)
+        addSubview(roundLabel)
         addSubview(countLabel)
         addSubview(dateLabel)
         addSubview(openButton)
         
-        titleLabel.snp.makeConstraints { make in
+        roundLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview().offset(-10)
             make.left.equalToSuperview().offset(30)
         }
         
         countLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(titleLabel.snp.centerY)
-            make.left.equalTo(titleLabel.snp.right).offset(10)
+            make.centerY.equalTo(roundLabel.snp.centerY)
+            make.left.equalTo(roundLabel.snp.right).offset(10)
             make.width.equalTo(60)
             make.height.equalTo(20)
         }
         
         dateLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(7)
-            make.left.equalTo(titleLabel.snp.left)
+            make.top.equalTo(roundLabel.snp.bottom).offset(7)
+            make.left.equalTo(roundLabel.snp.left)
         }
         
         openButton.snp.makeConstraints { make in

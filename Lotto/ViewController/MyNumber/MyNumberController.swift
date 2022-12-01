@@ -71,8 +71,8 @@ class MyNumberController: UIViewController {
     }
     
     private func initData() {
-        tableView.isHidden = true
-        noDataLabel.isHidden = false
+        tableView.isHidden = false
+        noDataLabel.isHidden = true
     }
     
     @objc
@@ -116,6 +116,7 @@ class MyNumberController: UIViewController {
     @objc
     private func handleManual() {
         let vc = ManualController()
+        vc.delegate = self
         let nav = UINavigationController(rootViewController: vc)
         present(nav, animated: true)
     }
@@ -123,6 +124,7 @@ class MyNumberController: UIViewController {
     @objc
     private func handleQR() {
         let vc = ScannerController()
+        vc.delegate = self
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true)
@@ -358,7 +360,7 @@ extension MyNumberController: UITableViewDataSource,
                               UITableViewDelegate {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
+        return 5
     }
     
     func tableView(
@@ -474,5 +476,28 @@ extension MyNumberController: MyNumberHeaderDelegate {
                 self.tableView.reloadData()
             }
         }
+    }
+}
+
+extension MyNumberController: ManualControllerDelegate {
+    
+    func didSave(_ number: [Int]) {
+        
+    }
+}
+
+extension MyNumberController: ScannerControllerDelegate {
+    
+    func didScan(_ qrScan: QRScan) {
+        let scanPopup = ScanPopup(data: qrScan)
+        scanPopup.delegate = self
+        scanPopup.show()
+    }
+}
+
+extension MyNumberController: ScanPopupDelegate {
+    
+    func didSaveScan(_ qrScan: QRScan) {
+        
     }
 }

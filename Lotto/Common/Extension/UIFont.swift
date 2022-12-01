@@ -9,11 +9,11 @@ import UIKit
 
 extension UIFont {
     
-    static func customFont(ofSize fontSize: CGFloat, isBold: Bool = false) -> UIFont? {
-        if isBold {
-            return UIFont(name: "GmarketSansBold", size: fontSize)
-        } else {
-            return UIFont(name: "GmarketSansMedium", size: fontSize)
-        }
+    static func sandsFont(ofSize fontSize: CGFloat) -> UIFont? {
+        return UIFont(name: "GmarketSansMedium", size: fontSize)
+    }
+    
+    static func boldSandsFont(osSize fontSize: CGFloat) -> UIFont? {
+        return UIFont(name: "GmarketSansBold", size: fontSize)
     }
 }

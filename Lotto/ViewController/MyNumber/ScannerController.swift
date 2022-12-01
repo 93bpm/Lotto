@@ -11,10 +11,12 @@ import SnapKit
 import Then
 
 protocol ScannerControllerDelegate: AnyObject {
-    func didScanNumber(_ number: [Int])
+    func didScan(_ qrScan: QRScan)
 }
 
 class ScannerController: UIViewController {
+    
+    weak var delegate: ScannerControllerDelegate?
     
     var scannerView: ScannerView!
     var cancelButton: UIButton!
@@ -81,34 +83,16 @@ extension ScannerController: ScannerViewDelegate {
         switch status {
         case .success(let url):
             guard let url = url, !url.isEmpty else {
-                return print("url is empty")
+                showToast(message: "잘못된 URL입니다.")
+                return
             }
             
-            var components = url.components(separatedBy: "q")
-            if let round = components[0].components(separatedBy: "v=").last {
-                print("round:", Int(round) ?? 0)
-                components.removeFirst()
+            if let qrScan = QRScan(from: url) {
+                delegate?.didScan(qrScan)
+                dismiss(animated: true)
+            } else {
+                showToast(message: "로또용지를 스캔해주세요")
             }
-            
-            var nums = [[Int]]()
-            for component in components {
-                var value = component
-                
-                var num = [Int]()
-                for _ in 0...5 {
-                    let r = value.index(value.startIndex, offsetBy: 2)
-                    if let no = Int(value[value.startIndex..<r]) {
-                        value = String(value[r..<value.endIndex])
-                        num.append(no)
-                    }
-                }
-                
-                print(num)
-                nums.append(num)
-            }
-            
-            print(nums)
-            //TODO: 스캔 후 뒤로간 다음 등록번호 팝업창 띄우기
         case .fail:
             print("fail to capture")
         case .stop(let status):

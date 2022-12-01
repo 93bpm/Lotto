@@ -293,7 +293,10 @@ extension ScannerView: AVCaptureMetadataOutputObjectsDelegate {
         
         found(code: stringValue)
         stop(isTap: true)
-        start()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.start()
+        }
     }
 }
 
